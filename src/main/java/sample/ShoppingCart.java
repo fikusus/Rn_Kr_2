@@ -6,7 +6,6 @@ import java.text.*;
 * Containing items and calculating price.
 */
 public class ShoppingCart {
-    public static enum ItemType { NEW, REGULAR, SECOND_FREE, SALE };
 
     /**
      * Adds new item.
@@ -18,7 +17,7 @@ public class ShoppingCart {
      *
      * @throws IllegalArgumentException if some value is wrong
      */
-    public void addItem(String title, double price, int quantity, ItemType type){
+    public void addItem(String title, double price, int quantity, Item.ItemType type){
         if (title == null || title.length() == 0 || title.length() > 32)
             throw new IllegalArgumentException("Illegal title");
         if (price < 0.01)
@@ -146,7 +145,7 @@ public class ShoppingCart {
      * For each full 10 not NEW items item gets additional 1% discount,
      * but not more than 80% total
      */
-    public static int calculateDiscount(ItemType type, int quantity){
+    public static int calculateDiscount(Item.ItemType type, int quantity){
         int discount = 0;
         switch (type) {
             case NEW:
@@ -169,13 +168,7 @@ public class ShoppingCart {
         }
         return discount;
     }
-    /** item info */
-    private static class Item{
-        String title;
-        double price;
-        int quantity;
-        ItemType type;
-    }
+
     /** Container for added items */
     private List<Item> items = new ArrayList<Item>();
 }
