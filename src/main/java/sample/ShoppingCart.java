@@ -91,9 +91,7 @@ public class ShoppingCart {
             appendFormatted(sb, header[i], align[i], width[i]);
             sb.append("\n");
         // separator
-        for (int i = 0; i < lineLength; i++)
-            sb.append("-");
-            sb.append("\n");
+        separator(lineLength, sb);
         // lines
         for (String[] line : lines) {
             for (int i = 0; i < line.length; i++)
@@ -102,15 +100,20 @@ public class ShoppingCart {
         }
         if (lines.size() > 0) {
             // separator
-            for (int i = 0; i < lineLength; i++)
-                sb.append("-");
-            sb.append("\n");
+            separator(lineLength, sb);
         }
         // footer
         for (int i = 0; i < footer.length; i++)
             appendFormatted(sb, footer[i], align[i], width[i]);
         return sb.toString();
     }
+
+    private void separator(int lineLength, StringBuilder sb) {
+        for (int i = 0; i < lineLength; i++)
+            sb.append("-");
+        sb.append("\n");
+    }
+
     // --- private section -----------------------------------------------------
     private static final NumberFormat MONEY;
         static {
